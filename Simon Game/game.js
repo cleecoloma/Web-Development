@@ -14,7 +14,7 @@ $(".btn").click(function() {
 function nextSequence() {
     var randomNumber = Math.floor(Math.random()*4); //picks a random number from 0 to 3
     var randomChosenColour = buttonColours[randomNumber];
-    gamePattern.push(randomChosenColour);
+    gamePattern.push(randomChosenColour); //adds randomChosenColour to the gamePattern array
 
     $("#" +randomChosenColour).fadeIn(100).fadeOut(100).fadeIn(100);
 
@@ -23,7 +23,7 @@ function nextSequence() {
 
 
 function playSound(name) {
-    var audio = new Audio("sounds/" + name + ".mp3");
+    var audio = new Audio("sounds/" + name + ".mp3"); //picks the right audio to play based on the input name
     audio.play();
 }
 
