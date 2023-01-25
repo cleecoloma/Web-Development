@@ -16,7 +16,7 @@ app.post("/", function(req,res) {
     var num2 = Number(req.body.mum2)
 
     var result = num1 + num2;
-    res.send("The calculation answer is " + result + ".");
+    res.send("The calculation answer is " + result + "."); //prints calculation results
 });
 
 
@@ -31,9 +31,8 @@ app.post("/bmicalculator", function(req,res) {
     var height = parseFloat(req.body.height)
 
     var bmi = weight / (height * height); //calculates BMI
-    res.send("Your BMI is " + bmi + ".");
-});
+    res.send("Your BMI is " + bmi + "."); //outputs results after calculations
 
 app.listen(3000, function() {
-    console.log("Server started on port 3000");
+    console.log("Server started on port 3000"); //states that port 3000 has been started
 });
