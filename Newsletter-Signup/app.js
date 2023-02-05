@@ -3,10 +3,12 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const request = require("request");
-const https = require("https")
-const mailchimp = require("@mailchimp/mailchimp_marketing");
+const https = require("https");
+const dotenv = require('dotenv');
+dotenv.config();
 
 const app = express();
+const apiKey = process.env.API_KEY;
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({
@@ -22,7 +24,7 @@ app.post("/", function (req, res) {
     const lastName = req.body.lName;
     const email = req.body.email;
 
-    var data = {
+    const data = {
         members: [{
             email_address: email,
             status: "subscribed",
@@ -33,61 +35,39 @@ app.post("/", function (req, res) {
         }]
     };
     const jsonData = JSON.stringify(data);
+    const url = "https://us17.api.mailchimp.com/3.0/lists/1e11768765"
+
+    const options = {
+        method: "POST",
+        auth: "chester1:"+ apiKey
+    }
+
     const request = https.request(url, options, function (response) {
+        if (response.statusCode === 200) {
+            res.sendFile(__dirname + "/success.html")
+        }else {
+            res.sendFile(__dirname + "/failure.html")
+        }
         response.on("data", function (data) {
-            console.log(JSON.parse(data))
+            console.log(JSON.parse(data));
         })
 
     })
 
     request.write(jsonData);
 
-    request.end;
+    request.end();
+    console.log(jsonData);
 });
 
-
-const url = "https://us17.api.mailchimp.com/3.0/lists/1e11768765"
-
-const options = {
-    method: "POST",
-    auth: "chester1: 4aa97be82e80e3c0c29387981c9bd944-us17"
-}
-
-mailchimp.setConfig({
-    apiKey: "4aa97be82e80e3c0c29387981c9bd944-us17",
-    server: "us17",
-});
-
-async function run() {
-    const response = await mailchimp.lists.addListMember("1e11768765", {
-            members: [{}],
-        });
-    };
-
-console.log(
-    `Successfully added contact as an audience member.`
-);
-
-
-// run();
-
-// const run = async () => {
-//     const response = await mailchimp.lists.batchListMembers("l1e11768765", {
-//         members: [{}],
-//     });
-//     console.log(response);
-// };
-
-// run();
-
+app.post("/failure", function(req, res){
+    res.redirect("/")
+})
 
 
 app.listen(3000, function () {
     console.log("Server is running at port 3000!");
 });
-
-// API key
-//4aa97be82e80e3c0c29387981c9bd944-us17
 
 
 // List ID
