@@ -3,19 +3,23 @@ const bodyParser = require("body-parser");
 
 const app = express();
 
-app.get("/", function(req, res){
+app.set("view engine", "ejs");
+
+app.get("/", function (req, res) {
     var today = new Date();
     var currentDay = today.getDay();
-    if (currentDay === 6 || currentDay === 0) {
-        res.send("<h1>Yay it's the weekend!</h1>");
-    } else {
-        res.send("<h1>Boo! I have to work!</h1>")
-    }
-    // res.send("Hello");
+    var day = "";
+    const listOfDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    day = listOfDays[currentDay];
+    // Another way to accomplish this task is to use if else statement
+    // Also we can use switch statement to do this
+    res.render("list", {
+        kindOfDay: day
+    })
 });
 
 
 
-app.listen(3000, function(){
+app.listen(3000, function () {
     console.log("Server started on port 3000!")
 });
