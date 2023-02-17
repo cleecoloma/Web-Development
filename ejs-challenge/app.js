@@ -21,6 +21,22 @@ app.get("/", function (req, res) {
   });
 })
 
+app.get("/about", function (req, res) {
+  res.render("about", {
+    aboutParagraphContent: aboutContent
+  });
+})
+
+app.get("/contact", function (req, res) {
+  res.render("contact", {
+    contactParagraphContent: contactContent
+  });
+})
+
+app.get("/compose", function (req, res) {
+  res.render("compose");
+})
+
 
 
 
