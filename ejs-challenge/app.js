@@ -61,7 +61,7 @@ app.get("/posts/:postName", function (req, res) {
     if (storedTitle === requestedTitle) {
       res.render("post", {
         loadedTitle: post.title,
-        loadedContent: post.content
+        loadedContent: post.content,
       });
     }
   });
