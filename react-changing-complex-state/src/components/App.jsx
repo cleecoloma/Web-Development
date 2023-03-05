@@ -18,27 +18,27 @@ function App() {
       } else if (name === "lName") {
         return {
           fName: prevValue.fName,
-          lname: value
+          lName: value
         };
-      } 
-    });
+      }
+    })
   }
 
-
+  
   return (
     <div className="container">
       <h1>
         Hello {fullName.fName} {fullName.lName}
       </h1>
       <form>
-        <input
-          name="fName"
+        <input 
+          name="fName" 
           onChange={handleChange}
-          placeholder="First Name"
+          placeholder="First Name" 
           value={fullName.fName}
         />
-        <input
-          name="lName"
+        <input 
+          name="lName" 
           onChange={handleChange}
           placeholder="Last Name"
           value={fullName.lName}
