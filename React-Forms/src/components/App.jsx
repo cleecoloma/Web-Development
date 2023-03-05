@@ -5,8 +5,8 @@ function App() {
   const [headingText, setHeading] = useState("");
 
   function handleChange() {
-    console.log(event.target.value);
-    setName(event.target.value);
+    // console.log(target.value);
+    setName(target.value);
     // console.log(event.target.placeholder);
     // console.log(event.target.type);
   }
